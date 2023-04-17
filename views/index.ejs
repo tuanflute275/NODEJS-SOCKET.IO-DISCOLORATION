@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CHAT ROOM</title>
+    <script src="jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:3000')
+        socket.on('server-send-color', (data) => {
+            $('body').attr('bgcolor', data)
+        })
+        socket.on('server-send-text', (data) => {
+            $('h2').append(data + ',')
+        })
+        $(document).ready(function () {
+            $('#btn-purple').click(() => {
+                socket.emit('client-send-color', 'purple')
+            })
+            $('#btn-green').click(() => {
+                socket.emit('client-send-color', 'green')
+            })
+            $('#btn-yellow').click(() => {
+                socket.emit('client-send-color', 'yellow')
+            })
+            $('#btn-green-2').click(() => {
+                socket.emit('client-send-color', '#CCFF66')
+            })
+            $('#btn-aqua').click(() => {
+                socket.emit('client-send-color', '#6699FF')
+            })
+            $('#btn-pink').click(() => {
+                socket.emit('client-send-color', '#CC99FF')
+            })
+        })
+    </script>
+</head>
+<body>
+    <button id="btn-purple">click purple color</button>
+    <button id="btn-green">click green color</button>
+    <button id="btn-yellow">click yellow color</button>
+    <button id="btn-aqua">click aqua color</button>
+    <button id="btn-green-2">click green-2 color</button>
+    <button id="btn-pink">click pink color</button>
+</body>
+</html>
